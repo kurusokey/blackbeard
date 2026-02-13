@@ -10,7 +10,7 @@ export default function Footer() {
         <svg className="w-full h-full" viewBox="0 0 800 400" preserveAspectRatio="none">
           <path d="M100,50 Q200,100 300,50 T500,50 L550,150 Q600,200 650,150 L700,350 Q650,300 600,350 L400,350 Q350,300 300,350 L100,350 Q50,300 50,200 Z" 
                 fill="var(--pirate-wood)" opacity="0.3"/>
-          ircle cx="400" cy="200" r="30" fill="var(--pirate-gold)" opacity="0.6"/>
+          <circle cx="400" cy="200" r="30" fill="var(--pirate-gold)" opacity="0.6"/>
           <text x="400" y="210" fontSize="30" fill="var(--blood-red)" textAnchor="middle" fontFamily="Pirata One">✕</text>
         </svg>
       </div>
