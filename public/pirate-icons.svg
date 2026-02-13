@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">\
+  <!-- Ancre -->\
+  <symbol id="icon-anchor" viewBox="0 0 24 24">\
+    <path d="M12 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 8c-1.1 0-2 .9-2 2v8l-3 2a2 2 0 1 0 0 4h10a2 2 0 1 0 0-4l-3-2v-8c0-1.1-.9-2-2-2zM5 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm14 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>\
+  </symbol>\
+  \
+  <!-- Boussole -->\
+  <symbol id="icon-compass" viewBox="0 0 24 24">\
+    ircle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>\
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1"/>\
+    <path d="M12 8l2 4-4 2 2-6z" fill="currentColor"/>\
+  </symbol>\
+  \
+  <!-- Cr\'e2ne pirate -->\
+  <symbol id="icon-skull" viewBox="0 0 24 24">\
+    <ellipse cx="12" cy="10" rx="8" ry="9" fill="currentColor"/>\
+    ircle cx="9" cy="9" r="2" fill="#000"/>\
+    ircle cx="15" cy="9" r="2" fill="#000"/>\
+    <path d="M8 14h8v6h-8z" fill="currentColor"/>\
+    <rect x="9" y="16" width="2" height="4" fill="#000"/>\
+    <rect x="13" y="16" width="2" height="4" fill="#000"/>\
+  </symbol>\
+  \
+  <!-- Coffre au tr\'e9sor -->\
+  <symbol id="icon-treasure" viewBox="0 0 24 24">\
+    <rect x="4" y="10" width="16" height="10" rx="1" fill="currentColor"/>\
+    <path d="M4 10h16v-2a4 4 0 0 0-16 0v2z" fill="currentColor" opacity="0.7"/>\
+    ircle cx="12" cy="15" r="2" fill="#FFD700"/>\
+  </symbol>\
+  \
+  <!-- Gouvernail -->\
+  <symbol id="icon-wheel" viewBox="0 0 24 24">\
+    ircle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>\
+    ircle cx="12" cy="12" r="3" fill="currentColor"/>\
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2l2.8 2.8M5 19l2.8-2.8M16.2 7.8l2.8-2.8" stroke="currentColor" stroke-width="2"/>\
+  </symbol>\
+  \
+  <!-- Carte au tr\'e9sor -->\
+  <symbol id="icon-map" viewBox="0 0 24 24">\
+    <path d="M2 4l7 3v14\
+}
