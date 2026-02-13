@@ -65,7 +65,7 @@ export default async function Home() {
           <div className="mt-16 flex items-center justify-center gap-4 opacity-50">
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-pirate-gold to-transparent"></div>
             <svg className="w-8 h-8" viewBox="0 0 24 24" fill="var(--pirate-gold)">
-              ircle cx="12" cy="12" r="3"/>
+              <circle cx="12" cy="12" r="3"/>
             </svg>
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-pirate-gold to-transparent"></div>
           </div>
@@ -139,12 +139,12 @@ export default async function Home() {
         {/* Décorations background */}
         <div className="absolute top-20 left-10 opacity-5 pointer-events-none">
           <svg className="w-64 h-64" viewBox="0 0 200 200" fill="var(--pirate-gold)">
-            ircle cx="100" cy="100" r="80"/>
+            <circle cx="100" cy="100" r="80"/>
           </svg>
         </div>
         <div className="absolute bottom-20 right-10 opacity-5 pointer-events-none">
           <svg className="w-64 h-64" viewBox="0 0 200 200" fill="var(--caribbean-blue)">
-            ircle cx="100" cy="100" r="80"/>
+            <circle cx="100" cy="100" r="80"/>
           </svg>
         </div>
       </section>
@@ -190,7 +190,7 @@ export default async function Home() {
             <div className="relative">
               <div className="card-pirate p-8 text-center">
                 <svg className="w-full h-64 mx-auto mb-6" viewBox="0 0 200 200" fill="none">
-                  ircle cx="100" cy="100" r="80" fill="var(--rum-amber)" opacity="0.3"/>
+                  <circle cx="100" cy="100" r="80" fill="var(--rum-amber)" opacity="0.3"/>
                   <rect x="70" y="40" width="60" height="120" rx="30" fill="var(--rum-amber)" opacity="0.6"/>
                   <rect x="75" y="45" width="50" height="100" rx="25" fill="var(--rum-amber)"/>
                   <ellipse cx="100" cy="50" rx="20" ry="8" fill="var(--pirate-wood)"/>
@@ -239,5 +239,3 @@ export default async function Home() {
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <svg className="absolute bottom-0 w-full" viewBox="0 0 1200 100" preserveAspectRatio="none">
             <path fill="var(--pirate-black)" d="M0,50 Q300,100 600,50 T1200,50 L1200,100 L0,100 Z">
-              <animate attributeName="d" dur="10s" repeatCount="indefinite" 
-                values="M0,50 Q300,100 
