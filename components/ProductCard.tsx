@@ -4,79 +4,68 @@ import { Product } from '@/types';
 
 interface ProductCardProps {
   product: Product;
+  index?: number;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   return (
-    <div className="card-pirate group cursor-pointer">
+    <div className="product-card group">
+      {/* Numéro de collection */}
+      <div className="collection-number">
+        N°{String(index + 1).padStart(2, '0')}
+      </div>
+
       {/* Image produit */}
-      <div className="relative h-72 bg-pirate-wood/10 overflow-hidden">
+      <div className="relative h-80 bg-noir-profond overflow-hidden">
         <Image
           src={product.image_url || '/placeholder-rum.jpg'}
           alt={product.name}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
+          className="object-contain p-8"
+          style={{ objectFit: 'contain' }}
         />
         
-        {/* Badge "Nouveau" ou "Promo" */}
+        {/* Badge Featured */}
         {product.is_featured && (
-          <div className="absolute top-4 right-4 bg-pirate-gold text-pirate-dark px-3 py-1 rounded-full font-bold text-sm shadow-lg animate-pulse">
-            ⭐ Phare
+          <div className="absolute top-4 right-4 px-3 py-1 bg-transparent border border-or-vieilli text-or-vieilli text-xs uppercase tracking-wider">
+            Édition Limitée
           </div>
         )}
-        
-        {/* Overlay hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-pirate-brown via-transparent to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
       </div>
 
       {/* Contenu */}
-      <div className="p-6 relative z-10">
+      <div className="product-card-content">
         {/* Nom produit */}
-        <h3 className="text-2xl font-bold mb-3 text-pirate-brown group-hover:text-pirate-gold transition-colors">
+        <h3>
           {product.name}
         </h3>
 
         {/* Description */}
-        <p className="text-pirate-wood text-sm mb-4 leading-relaxed line-clamp-3">
+        <p className="text-sm mb-4">
           {product.description}
         </p>
 
-        {/* Tags ingrédients */}
-        {product.ingredients && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {product.ingredients.slice(0, 3).map((ingredient, index) => (
-              <span 
-                key={index}
-                className="text-xs bg-parchment-dark text-pirate-wood px-2 py-1 rounded-full border border-pirate-wood/30"
-              >
-                {ingredient}
-              </span>
-            ))}
-          </div>
-        )}
+        {/* Ligne or de séparation */}
+        <div className="product-card-divider"></div>
 
-        {/* Prix et CTA */}
-        <div className="flex justify-between items-center pt-4 border-t-2 border-pirate-wood/20">
-          <div className="flex flex-col">
-            <span className="text-3xl font-bold text-rum-amber">
-              {product.price}€
-            </span>
-            <span className="text-xs text-pirate-wood/60">
-              {product.volume || '70cl'}
-            </span>
-          </div>
-          
-          <Link 
-            href={`/produits/${product.slug}`}
-            className="btn-pirate px-6 py-3 rounded-lg text-sm hover:scale-105 transition-all"
-          >
-            Découvrir 🏴‍☠️
-          </Link>
+        {/* Prix et volume */}
+        <div className="flex items-baseline gap-3 mb-6">
+          <span className="product-price text-2xl">
+            {product.price}€
+          </span>
+          <span className="product-volume">
+            {product.volume || '70cl'}
+          </span>
         </div>
-      </div>
 
-      {/* Coins pliés effet */}
-      <div className="absolute bottom-0 left-0 w-0 h-0 border-l-[30px] border-l-transparent border-b-[30px] border-b-pirate-brown/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        {/* Bouton */}
+        <Link 
+          href={`/produits/${product.slug}`}
+          className="btn-primary inline-block w-full text-center"
+        >
+          Voir la fiche
+        </Link>
+      </div>
     </div>
   );
 }
