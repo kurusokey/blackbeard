@@ -1,246 +1,276 @@
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
+import Image from 'next/image';
 import ProductCard from '@/components/ProductCard';
-import { Product } from '@/types';
+import ScrollReveal from '@/components/ScrollReveal';
+import { getFeaturedProducts } from '@/lib/products';
 
-async function getFeaturedProducts(): Promise<Product[]> {
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('is_active', true)
-    .limit(3);
-
-  if (error) {
-    console.error('Error fetching products:', error);
-    return [];
-  }
-
-  return data || [];
-}
-
-export default async function Home() {
-  const products = await getFeaturedProducts();
+export default function Home() {
+  const products = getFeaturedProducts();
 
   return (
     <main className="min-h-screen">
-      {/* ========== HERO SECTION ========== */}
-      <section className="hero-pirate relative">
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          {/* Logo Ancre */}
-          <div className="flex justify-center mb-6 animate-bounce">
-            <svg className="w-20 h-20 opacity-80" viewBox="0 0 24 24" fill="var(--pirate-gold)">
-              <path d="M12 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 8c-1.1 0-2 .9-2 2v8l-3 2a2 2 0 1 0 0 4h10a2 2 0 1 0 0-4l-3-2v-8c0-1.1-.9-2-2-2zM5 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm14 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-            </svg>
-          </div>
+      {/* ========== HERO — FULL SCREEN ========== */}
+      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        {/* Background image with Ken Burns effect */}
+        <Image
+          src="/images/hero-rum.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover animate-slow-zoom"
+          sizes="100vw"
+        />
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/50 to-ink z-[1]" />
+        {/* Bottom vignette for seamless transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-ink to-transparent z-[2]" />
 
-          {/* Titre principal */}
-          <h1 className="title-pirate text-6xl md:text-8xl font-bold mb-10 animate-fade-in">
-            Rhums Arrangés<br />
-            <span className="text-pirate-gold">Artisanaux</span>
-          </h1>
+        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+          <ScrollReveal delay={200} direction="none" duration={1000}>
+            <div className="gold-line-wide mx-auto mb-8" />
+          </ScrollReveal>
 
-          {/* Sous-titre */}
-          <p className="subtitle-pirate text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-90">
-            Découvrez nos rhums arrangés macérés avec les fruits des îles de la Caraïbe,
-            <br />pour des <span className="text-caribbean-blue font-bold">saveurs authentiques et exotiques</span>
-          </p>
+          <ScrollReveal delay={400} direction="up" distance={40} duration={1000}>
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold-light mb-6 font-serif">
+              Rhums Arranges d&apos;Exception
+            </p>
+          </ScrollReveal>
 
-          {/* CTA Boutons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link
-              href="/boutique"
-              className="btn-pirate inline-block px-10 py-5 rounded-xl font-bold hover:scale-105 transition-transform shadow-2xl"
-            >
-              ⚓ Explorer la Cale
-            </Link>
-            <Link
-              href="/a-propos"
-              className="btn-pirate-secondary inline-block px-10 py-5 rounded-xl font-bold hover:scale-105 transition-transform"
-            >
-              📜 Notre Histoire
-            </Link>
-          </div>
+          <ScrollReveal delay={600} direction="up" distance={50} duration={1200}>
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-gold font-semibold mb-8 tracking-wide text-shadow-lg leading-[0.95]">
+              Blackbeard
+            </h1>
+          </ScrollReveal>
 
-          {/* Divider décoratif */}
-          <div className="mt-16 flex items-center justify-center gap-4 opacity-50">
-            <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-pirate-gold to-transparent"></div>
-            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="var(--pirate-gold)">
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-pirate-gold to-transparent"></div>
-          </div>
+          <ScrollReveal delay={800} direction="up" distance={30} duration={1000}>
+            <p className="text-lg md:text-xl lg:text-2xl text-cream/90 max-w-2xl mx-auto mb-12 leading-relaxed text-shadow-sm font-light">
+              Rhums arranges 100% local — Des creations artisanales realisees avec les meilleurs fruits des iles de la Caraibe.
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal delay={1000} direction="up" distance={20} duration={1000}>
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+              <Link href="/boutique" className="btn-luxury-filled">
+                Decouvrir nos Planteurs
+              </Link>
+              <Link href="/a-propos" className="btn-luxury">
+                Notre Histoire
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-8 h-8 text-parchment opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
+        <ScrollReveal delay={1500} direction="up" distance={10} duration={1000} className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
+          <div className="flex flex-col items-center gap-2 text-cream/50">
+            <span className="text-[0.6875rem] uppercase tracking-[0.2em]">Defiler</span>
+            <div className="w-px h-8 bg-gradient-to-b from-cream/40 to-transparent animate-pulse" />
+          </div>
+        </ScrollReveal>
       </section>
 
-      {/* ========== WARNING SECTION ========== */}
-      <section className="bg-gradient-to-r from-blood-red/20 via-blood-red/10 to-blood-red/20 border-t-4 border-b-4 border-blood-red py-8 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-4 text-center">
-            <span className="text-4xl animate-pulse">⚠️</span>
-            <p className="text-red-200 font-bold text-lg md:text-xl">
-              L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
-            </p>
-            <span className="text-4xl animate-pulse">🍹</span>
-          </div>
-        </div>
-        
-        {/* Texture vagues danger */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blood-red/30 to-transparent"></div>
+      {/* ========== LEGAL NOTICE — SUBTLE ========== */}
+      <section className="py-4 md:py-5">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-cream-muted/50 text-xs tracking-wider uppercase">
+            L&apos;abus d&apos;alcool est dangereux pour la sante. A consommer avec moderation.
+          </p>
         </div>
       </section>
 
       {/* ========== FEATURED PRODUCTS ========== */}
-      <section className="py-20 px-4 bg-pirate-dark relative">
-        <div className="container mx-auto max-w-7xl">
-          {/* Titre section */}
-          <div className="text-center mb-16">
-            <h2 className="title-pirate text-5xl font-bold mb-6">
-              🏴‍☠️ Nos Produits Phares
-            </h2>
-            <p className="subtitle-pirate text-xl max-w-2xl mx-auto">
-              Une sélection des meilleurs rhums arrangés de la cale du capitaine
-            </p>
-          </div>
+      <section className="py-24 md:py-36 lg:py-44 px-6 bg-ink">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16 md:mb-24">
+              <p className="text-xs uppercase tracking-[0.3em] text-cream-muted mb-4 font-serif">Nos Planteurs</p>
+              <h2 className="font-serif text-gold mb-6">
+                Nos Creations Artisanales
+              </h2>
+              <div className="gold-line-wide mx-auto" />
+            </div>
+          </ScrollReveal>
 
-          {/* Grille produits */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 mb-16">
             {products.length > 0 ? (
-              products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              products.map((product, index) => (
+                <ScrollReveal key={product.id} delay={index * 150} direction="up" distance={50}>
+                  <ProductCard product={product} index={index} />
+                </ScrollReveal>
               ))
             ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-parchment-dark text-xl">
-                  🏴‍☠️ La cale est vide, revenez plus tard moussaillon !
+              <div className="col-span-full text-center py-20">
+                <p className="text-cream-muted text-lg">
+                  Aucun produit disponible pour le moment.
                 </p>
               </div>
             )}
           </div>
 
-          {/* CTA Voir tous les produits */}
-          <div className="text-center">
-            <Link
-              href="/boutique"
-              className="btn-pirate inline-block px-12 py-5 rounded-xl font-bold hover:scale-105 transition-transform"
-            >
-              Voir tous les Rhums →
-            </Link>
-          </div>
-        </div>
-
-        {/* Décorations background */}
-        <div className="absolute top-20 left-10 opacity-5 pointer-events-none">
-          <svg className="w-64 h-64" viewBox="0 0 200 200" fill="var(--pirate-gold)">
-            <circle cx="100" cy="100" r="80"/>
-          </svg>
-        </div>
-        <div className="absolute bottom-20 right-10 opacity-5 pointer-events-none">
-          <svg className="w-64 h-64" viewBox="0 0 200 200" fill="var(--caribbean-blue)">
-            <circle cx="100" cy="100" r="80"/>
-          </svg>
+          <ScrollReveal>
+            <div className="text-center">
+              <Link href="/boutique" className="btn-luxury">
+                Voir tous nos Planteurs
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* ========== NOTRE SAVOIR-FAIRE ========== */}
-      <section className="py-20 px-4 bg-gradient-to-b from-pirate-brown to-pirate-black relative overflow-hidden">
-        <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Texte */}
-            <div>
-              <h2 className="title-pirate text-4xl md:text-5xl font-bold mb-8">
-                🍹 Les Secrets de la Cale
+      {/* ========== NOS VALEURS ========== */}
+      <section className="py-24 md:py-36 lg:py-44 px-6 bg-charcoal">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16 md:mb-24">
+              <p className="text-xs uppercase tracking-[0.3em] text-cream-muted mb-4 font-serif">Nos Engagements</p>
+              <h2 className="font-serif text-gold mb-6">Pourquoi Blackbeard</h2>
+              <div className="gold-line-wide mx-auto mb-6" />
+              <p className="text-cream/80 text-base leading-relaxed max-w-2xl mx-auto">
+                Nos planteurs sont faits de maniere artisanale avec des produits locaux.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+            {/* Valeur 1 */}
+            <ScrollReveal delay={0}>
+              <div className="text-center px-4">
+                <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-gold/5 border border-gold-muted/20 flex items-center justify-center">
+                  <svg className="w-9 h-9 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-serif text-xl text-gold mb-4 tracking-wider">Maceration Artisanale</h3>
+                <p className="text-cream-muted text-base leading-relaxed">
+                  Nos fruits macerent patiemment pour liberer des aromes d&apos;une richesse incomparable. Chaque bouteille est le fruit du temps et du savoir-faire.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Valeur 2 */}
+            <ScrollReveal delay={150}>
+              <div className="text-center px-4">
+                <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-gold/5 border border-gold-muted/20 flex items-center justify-center">
+                  <svg className="w-9 h-9 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-serif text-xl text-gold mb-4 tracking-wider">100% Local</h3>
+                <p className="text-cream-muted text-base leading-relaxed">
+                  Fruits frais des Caraibes, selectionnes aupres de producteurs locaux. Des ingredients authentiques, un terroir respecte.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Valeur 3 */}
+            <ScrollReveal delay={300}>
+              <div className="text-center px-4">
+                <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-gold/5 border border-gold-muted/20 flex items-center justify-center">
+                  <svg className="w-9 h-9 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+                <h3 className="font-serif text-xl text-gold mb-4 tracking-wider">Fait Maison</h3>
+                <p className="text-cream-muted text-base leading-relaxed">
+                  Chaque bouteille est preparee a la main, en petite serie, pour garantir une qualite irreprochable a chaque gorgee.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== SAVOIR-FAIRE ========== */}
+      <section className="relative py-28 md:py-40 lg:py-52 px-6 overflow-hidden">
+        {/* Background image */}
+        <Image
+          src="/images/barrels.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-ink/80 z-[1]" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid md:grid-cols-12 gap-10 md:gap-20 items-center">
+            {/* Text — 7 columns */}
+            <ScrollReveal direction="left" className="md:col-span-7">
+              <p className="text-xs uppercase tracking-[0.3em] text-cream-muted mb-4 font-serif text-shadow-sm">Tradition</p>
+              <h2 className="font-serif text-gold mb-8 text-shadow-sm">
+                Notre Savoir-Faire
               </h2>
-              <div className="space-y-6 text-lg text-parchment-dark">
-                <p className="leading-relaxed">
-                  Nos rhums arrangés sont <strong className="text-pirate-gold">macérés à la main</strong> dans 
-                  les traditions des flibustiers des Caraïbes. Chaque bouteille contient des fruits exotiques 
-                  soigneusement sélectionnés : <em>vanille de Tahiti, ananas Victoria, mangue carotte...</em>
+              <div className="gold-line-wide mb-8" />
+              <div className="space-y-6 text-cream/90 leading-relaxed text-lg text-shadow-sm">
+                <p>
+                  Nous transmettons avec fierte nos <strong className="text-gold-light">traditions caribeennes</strong>.
+                  Chaque planteur est le resultat d&apos;un savoir-faire transmis de generation en generation,
+                  marie aux meilleurs fruits de nos iles.
                 </p>
-                <p className="leading-relaxed">
-                  Dans les cales du <strong className="text-rum-amber">Capitaine Blackbeard</strong>, 
-                  le temps fait son œuvre pendant plusieurs mois pour créer des saveurs 
-                  <span className="text-caribbean-blue font-bold"> authentiques et uniques</span>.
+                <p>
+                  De la selection des fruits a la maceration, chaque etape est realisee
+                  <span className="text-gold-light"> a la main, avec passion et exigence</span>.
                 </p>
-                <ul className="space-y-3 ml-6">
-                  <li className="flex items-start gap-3">
-                    <span className="text-pirate-gold text-2xl">⚓</span>
-                    <span>Macération artisanale de 3 à 12 mois</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-pirate-gold text-2xl">🌴</span>
-                    <span>Fruits des îles certifiés bio</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-pirate-gold text-2xl">🏴‍☠️</span>
-                    <span>Recettes héritées des pirates des Caraïbes</span>
-                  </li>
-                </ul>
               </div>
-            </div>
+            </ScrollReveal>
 
-            {/* Image/Illustration */}
-            <div className="relative">
-              <div className="card-pirate p-8 text-center">
-                <svg className="w-full h-64 mx-auto mb-6" viewBox="0 0 200 200" fill="none">
-                  <circle cx="100" cy="100" r="80" fill="var(--rum-amber)" opacity="0.3"/>
-                  <rect x="70" y="40" width="60" height="120" rx="30" fill="var(--rum-amber)" opacity="0.6"/>
-                  <rect x="75" y="45" width="50" height="100" rx="25" fill="var(--rum-amber)"/>
-                  <ellipse cx="100" cy="50" rx="20" ry="8" fill="var(--pirate-wood)"/>
-                  <text x="100" y="110" fontSize="40" fill="var(--parchment)" textAnchor="middle" fontFamily="Pirata One">🍹</text>
-                </svg>
-                <p className="text-pirate-brown font-bold text-xl">
-                  "Un trésor dans chaque bouteille"
-                </p>
-                <p className="text-pirate-wood italic mt-2">
-                  - Capitaine Blackbeard
-                </p>
-              </div>
+            {/* Key figures — 5 columns, vertical stack */}
+            <div className="md:col-span-5 space-y-6">
+              <ScrollReveal delay={0}>
+                <div className="bg-ink/40 backdrop-blur-sm border border-gold-muted/15 rounded-2xl p-8 text-center">
+                  <p className="font-serif text-5xl md:text-6xl text-gold mb-2">6+</p>
+                  <p className="text-cream-muted text-xs uppercase tracking-[0.2em]">Mois de maceration</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delay={150}>
+                <div className="bg-ink/40 backdrop-blur-sm border border-gold-muted/15 rounded-2xl p-8 text-center">
+                  <p className="font-serif text-5xl md:text-6xl text-gold mb-2">100%</p>
+                  <p className="text-cream-muted text-xs uppercase tracking-[0.2em]">Naturel</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delay={300}>
+                <div className="bg-ink/40 backdrop-blur-sm border border-gold-muted/15 rounded-2xl p-8 text-center">
+                  <p className="font-serif text-5xl md:text-6xl text-gold mb-2">971</p>
+                  <p className="text-cream-muted text-xs uppercase tracking-[0.2em]">Caraibes</p>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
-
-        {/* Fond texture bois */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43Ii8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI24pIi8+PC9zdmc+')] opacity-20"></div>
-        </div>
       </section>
 
-      {/* ========== CTA FINALE ========== */}
-      <section className="py-24 px-4 bg-gradient-to-r from-ocean-night via-caribbean-teal to-ocean-night relative overflow-hidden">
-        <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <h2 className="title-pirate text-5xl md:text-6xl font-bold mb-8">
-            Prêt à Lever l'Ancre ?
+      {/* ========== NEWSLETTER CTA ========== */}
+      <section className="relative py-28 md:py-40 lg:py-48 px-6 overflow-hidden">
+        {/* Background image */}
+        <Image
+          src="/images/caribbean.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-ink/85 z-[1]" />
+
+        <ScrollReveal className="max-w-2xl mx-auto text-center relative z-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-cream-muted mb-4 font-serif text-shadow-sm">Newsletter</p>
+          <h2 className="font-serif text-gold mb-6 text-shadow-sm">
+            Restez Informe
           </h2>
-          <p className="text-2xl text-parchment mb-12 leading-relaxed">
-            Rejoignez l'équipage de Blackbeard et recevez nos nouveautés,
-            <br />recettes exclusives et <span className="text-pirate-gold font-bold">offres de moussaillon</span>
+          <div className="gold-line-wide mx-auto mb-8" />
+          <p className="text-cream/80 mb-10 leading-relaxed text-lg text-shadow-sm">
+            Restez informe de nos nouvelles creations, offres exclusives et coulisses de fabrication.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
             <input
               type="email"
-              placeholder="votre.email@caraibe.fr"
-              className="flex-1 px-6 py-4 rounded-lg bg-parchment text-pirate-dark font-semibold border-4 border-pirate-wood focus:border-pirate-gold outline-none transition-all"
+              placeholder="votre@email.fr"
+              className="flex-1 px-5 py-4 bg-ink/40 backdrop-blur-sm border border-gold-muted/30 text-cream placeholder:text-cream-muted/40 focus:border-gold focus:outline-none transition-all duration-500 text-sm tracking-wider"
             />
-            <button className="btn-pirate px-8 py-4 rounded-lg whitespace-nowrap">
-              Embarquer 🏴‍☠️
+            <button className="btn-luxury-filled whitespace-nowrap">
+              S&apos;inscrire
             </button>
           </div>
-        </div>
-
-        {/* Vagues animées */}
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
-          <svg className="absolute bottom-0 w-full" viewBox="0 0 1200 100" preserveAspectRatio="none">
-            <path fill="var(--pirate-black)" d="M0,50 Q300,100 600,50 T1200,50 L1200,100 L0,100 Z"/>
-                        </svg>
-        </div>
+        </ScrollReveal>
       </section>
     </main>
   );

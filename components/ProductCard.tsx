@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types';
+import { getProductImage } from '@/lib/productImages';
 
 interface ProductCardProps {
   product: Product;
@@ -8,63 +9,65 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
-  return (
-    <div className="product-card group">
-      {/* Numéro de collection */}
-      <div className="collection-number">
-        N°{String(index + 1).padStart(2, '0')}
-      </div>
+  const price = (product.price_cents / 100).toFixed(2);
 
-      {/* Image produit */}
-      <div className="relative h-80 bg-noir-profond overflow-hidden">
+  return (
+    <div className="group relative">
+      {/* Image area — tall, rounded, no visible border */}
+      <div className="relative h-80 md:h-[420px] bg-charcoal/50 rounded-2xl overflow-hidden mb-6">
         <Image
-          src={product.image_url || '/placeholder-rum.jpg'}
+          src={getProductImage(product.slug, product.image_url)}
           alt={product.name}
           fill
-          className="object-contain p-8"
+          className="object-contain p-8 md:p-10 group-hover:scale-110 transition-transform duration-700 ease-out"
           style={{ objectFit: 'contain' }}
         />
-        
+
+        {/* Gradient overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
         {/* Badge Featured */}
         {product.is_featured && (
-          <div className="absolute top-4 right-4 px-3 py-1 bg-transparent border border-or-vieilli text-or-vieilli text-xs uppercase tracking-wider">
-            Édition Limitée
+          <div className="absolute top-5 right-5 px-4 py-1.5 bg-gold/10 backdrop-blur-sm border border-gold-muted/40 text-gold text-[0.6875rem] uppercase tracking-[0.15em] rounded-full">
+            Edition Limitee
           </div>
         )}
+
+        {/* Collection number */}
+        <div className="absolute top-5 left-5 text-cream-muted/30 text-sm font-serif tracking-widest">
+          N&deg;{String(index + 1).padStart(2, '0')}
+        </div>
+
+        {/* CTA overlay on hover — slides up */}
+        <div className="absolute inset-x-0 bottom-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+          <Link
+            href={`/produits/${product.slug}`}
+            className="block w-full text-center py-3 bg-gold text-ink text-xs font-semibold uppercase tracking-[0.15em] rounded-lg transition-colors duration-300 hover:bg-gold-light"
+          >
+            Decouvrir
+          </Link>
+        </div>
       </div>
 
-      {/* Contenu */}
-      <div className="product-card-content">
-        {/* Nom produit */}
-        <h3>
+      {/* Content — minimal, below the image */}
+      <div className="px-2">
+        <h3 className="text-lg font-serif text-gold mb-2 tracking-wider">
           {product.name}
         </h3>
 
-        {/* Description */}
-        <p className="text-sm mb-4">
+        <p className="text-sm text-cream-muted leading-relaxed mb-4 line-clamp-2">
           {product.description}
         </p>
 
-        {/* Ligne or de séparation */}
-        <div className="product-card-divider"></div>
-
-        {/* Prix et volume */}
-        <div className="flex items-baseline gap-3 mb-6">
-          <span className="product-price text-2xl">
-            {product.price}€
+        {/* Price row */}
+        <div className="flex items-baseline gap-3">
+          <span className="text-xl font-semibold text-warm-white tracking-wide">
+            {price}&euro;
           </span>
-          <span className="product-volume">
+          <span className="text-xs text-cream-muted/60 uppercase tracking-wider">
             {product.volume || '70cl'}
           </span>
         </div>
-
-        {/* Bouton */}
-        <Link 
-          href={`/produits/${product.slug}`}
-          className="btn-primary inline-block w-full text-center"
-        >
-          Voir la fiche
-        </Link>
       </div>
     </div>
   );

@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Cinzel } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AgeVerification from '@/components/AgeVerification';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel', weight: ['400', '500', '600', '700'] });
 
 export const metadata: Metadata = {
-  title: 'Rhums Arrangés - Artisanaux et Naturels',
-  description: 'Découvrez nos rhums arrangés artisanaux, macérés avec des ingrédients naturels',
+  title: 'Blackbeard — Rhums Arrangés Artisanaux',
+  description: 'Découvrez nos rhums arrangés artisanaux, macérés avec des ingrédients naturels des Caraïbes.',
 };
 
 export default function RootLayout({
@@ -20,11 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${cinzel.variable} bg-ink text-cream`}>
         <CartProvider>
           <AgeVerification />
           <Header />
-          <main className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+          <main className="min-h-screen">
             {children}
           </main>
           <Footer />

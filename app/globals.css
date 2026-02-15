@@ -1,206 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&display=swap');
+
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap');
+/* ============================================
+   THEME - Premium Luxe
+   ============================================ */
+
+@theme {
+  --color-ink: #0B0E11;
+  --color-charcoal: #161A1F;
+  --color-slate-dark: #1E2328;
+  --color-gold: #C8A24D;
+  --color-gold-light: #D4B76A;
+  --color-gold-muted: #8B7434;
+  --color-teal: #2A7C7B;
+  --color-teal-light: #3A9B9A;
+  --color-cream: #E8E0D0;
+  --color-cream-muted: #9B9285;
+  --color-crimson: #8B2F3A;
+  --color-crimson-light: #A63D4A;
+  --color-warm-white: #F5F0E8;
+
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Cinzel Decorative', serif;
+
+  --animate-fade-in: fade-in 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-slide-up: slide-up 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-slow-zoom: slow-zoom 20s ease-in-out infinite alternate;
+}
+
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
 
 :root {
-  --or-jazz: #D4A853;
-  --brun-ocre: #B8733E;
-  --noir-jazz: #1A1A1A;
-  --gris-fonce: #2A2A2A;
-  --blanc: #FFFFFF;
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Roboto', sans-serif;
+  --ink: #0B0E11;
+  --charcoal: #161A1F;
+  --slate: #1E2328;
+  --gold: #C8A24D;
+  --gold-light: #D4B76A;
+  --gold-muted: #8B7434;
+  --teal: #2A7C7B;
+  --teal-light: #3A9B9A;
+  --cream: #E8E0D0;
+  --cream-muted: #9B9285;
+  --crimson: #8B2F3A;
+  --crimson-light: #A63D4A;
+  --white: #F5F0E8;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: var(--font-sans);
-  background: var(--noir-jazz);
-  color: var(--blanc);
-  line-height: 1.6;
+  background: var(--ink);
+  color: var(--cream);
+  line-height: 1.7;
+  font-size: 1.0625rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-h1, h2, h3 { font-family: var(--font-serif); color: var(--or-jazz); font-weight: 600; }
-h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-h2 { font-size: 2rem; margin-bottom: 0.8rem; }
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
 
-/* Header Contact Band */
-.contact-band {
-  background: var(--noir-jazz);
-  color: var(--blanc);
-  padding: 0.5rem 2rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-.contact-band a { color: var(--or-jazz); text-decoration: none; }
-
-/* Header */
-header {
-  background: var(--gris-fonce);
-  padding: 1rem 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-/* Logo avec bordure */
-.logo {
-  border: 2px solid var(--or-jazz);
-  padding: 0.5rem 1rem;
-  display: inline-block;
+h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
-  color: var(--blanc);
-  text-decoration: none;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
 }
 
-/* Navigation */
-nav a {
-  color: var(--blanc);
-  text-decoration: none;
-  margin: 0 1.5rem;
-  font-size: 0.95rem;
-  transition: color 0.3s;
+h1 {
+  font-size: clamp(2.75rem, 6vw, 5.875rem);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.06em;
 }
-nav a:hover { color: var(--or-jazz); }
 
-/* Hero Section */
-.hero {
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  margin-bottom: 0.75rem;
+}
+
+/* ============================================
+   PREMIUM UTILITIES
+   ============================================ */
+
+/* Section with background image + dark overlay */
+.section-bg {
   position: relative;
-  height: 500px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.hero-content {
-  position: relative;
-  text-align: center;
-  z-index: 2;
-}
-
-/* Bouton Or Carré Jazz */
-.btn-or {
-  background: var(--or-jazz);
-  color: var(--noir-jazz);
-  padding: 1rem 2.5rem;
-  border: none;
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-decoration: none;
-  display: inline-block;
-}
-.btn-or:hover {
-  background: var(--or-clair, #E0B860);
-  transform: translateY(-2px);
-}
-
-/* Section Brun Ocre */
-.section-ocre {
-  background: var(--brun-ocre);
-  padding: 4rem 2rem;
-}
-
-/* Section Noire */
-.section-noire {
-  background: var(--noir-jazz);
-  padding: 4rem 2rem;
-}
-
-/* Cartes Produits Style Carré Jazz */
-.product-card {
-  background: var(--gris-fonce);
-  margin: 2rem 0;
   overflow: hidden;
 }
 
-.product-card img {
-  width: 100%;
-  height: 300px;
-  object-fit: contain;
-  background: var(--noir-jazz);
+.section-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 14, 17, 0.7);
+  z-index: 1;
 }
 
-.product-card-content {
-  padding: 2rem;
+.section-bg > * {
+  position: relative;
+  z-index: 2;
 }
 
-.product-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
+/* Text shadow for readability on images */
+.text-shadow-sm {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.product-badge {
-  background: var(--or-jazz);
-  color: var(--noir-jazz);
-  padding: 0.3rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 500;
+.text-shadow-lg {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle grain texture overlay for premium feel */
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Gold decorative lines */
+.gold-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.gold-line-wide {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ============================================
+   LUXURY BUTTON STYLES
+   ============================================ */
+
+.btn-luxury {
   display: inline-block;
-  margin-bottom: 1rem;
-}
-
-.product-price {
-  font-size: 1.3rem;
-  color: var(--blanc);
-  font-weight: 500;
-  margin: 1rem 0;
-}
-
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Grid 2 colonnes */
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-}
-
-/* Message d'avertissement */
-.warning {
-  background: rgba(184, 115, 62, 0.3);
-  border: 1px solid var(--brun-ocre);
-  padding: 1rem;
-  text-align: center;
-  margin: 2rem auto;
-  max-width: 800px;
-}
-
-/* Footer */
-footer {
-  background: var(--noir-jazz);
-  padding: 3rem 2rem 2rem;
-  text-align: center;
-  border-top: 1px solid var(--or-jazz);
-}
-
-footer a {
-  color: var(--or-jazz);
+  position: relative;
+  padding: 1rem 2.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  background: transparent;
+  overflow: hidden;
+  transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
   text-decoration: none;
-  margin: 0 1rem;
+  text-align: center;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  h1 { font-size: 2rem; }
-  .grid-2 { grid-template-columns: 1fr; }
-  .hero { height: 400px; }
-  nav a { display: block; margin: 0.5rem 0; }
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+
+.btn-luxury:hover {
+  color: var(--ink);
+}
+
+.btn-luxury:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-luxury-filled {
+  display: inline-block;
+  position: relative;
+  padding: 1rem 2.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  color: var(--ink);
+  background: var(--gold);
+  overflow: hidden;
+  transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-luxury-filled:hover {
+  background: var(--gold-light);
+  color: var(--ink);
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
